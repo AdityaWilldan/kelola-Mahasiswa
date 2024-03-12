@@ -37,6 +37,11 @@
         top: 4px;
         left: 8px;
         } 
+
+        .thumbnail{
+            max-width: 90px;
+            max-height: 90px;
+        }
     </style>
     <!-- Tambahkan link ke Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
@@ -92,6 +97,7 @@
             <th class="py-2 px-4">nrp</th>
             <th class="py-2 px-4">jurusan</th>
             <th class="py-2 px-4">fakultas</th>
+            <th class="py-2 px-4">gambar</th>
             <th class="py-2 px-4">Edit data</th>
         </tr>
         @foreach($mahasiswa as $m)
@@ -101,6 +107,13 @@
             <td class="py-2 px-4">{{$m->nrp}}</td>
             <td class="py-2 px-4">{{$m->jurusan}}</td>
             <td class="py-2 px-4">{{$m->fakultas}}</td>
+            <td>
+                @if($m->gambar)
+                    <img src="{{ asset('images/' . $m->gambar) }}" alt="Gambar" class="thumbnail">
+                @else
+                    Tidak ada gambar
+                @endif
+            </td>
             <td class="py-2 px-4">
                 <a href="/Mahasiswa/{{$m->id}}/edit" class="bg-purple-500 text-white py-1 px-3 rounded text-sm hover:bg-purple-600 
                 focus:outline-none focus:ring-2 focus:ring-purple-500">Edit</a>

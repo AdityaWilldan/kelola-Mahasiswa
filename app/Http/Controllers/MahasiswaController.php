@@ -34,7 +34,19 @@ class MahasiswaController extends Controller
    // metode update
    public function update($id, Request $request){
       $mahasiswa = Mahasiswa::find($id);
-      $mahasiswa->update($request->except(['_token','submit']));
+      
+      $data = $request->except(['_token','submit','_method']);
+
+      if($request->hasFile('gambar')){
+         $gambar = $request->file('gambar');
+         $gambarName = time() . '.' . $gambar->getClientOriginalExtension();
+         $gambar->move(public_path('images'), $gambarName);
+
+         $data['gambar'] = $gambarName;
+      }
+
+
+      $mahasiswa->update($data);
       return redirect('/Mahasiswa');
    }
 
